@@ -27,8 +27,6 @@ import com.google.android.enterprise.connectedapps.instrumented.utils.Instrument
 import com.google.android.enterprise.connectedapps.testapp.connector.TestProfileConnector;
 import com.google.android.enterprise.connectedapps.testapp.types.ProfileTestCrossProfileType;
 import java.util.concurrent.ExecutionException;
-
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,8 +40,8 @@ public class MessageSizeTest {
   private static final String SMALL_STRING = "String";
   private static final String LARGE_STRING = randomString(1500000); // 3Mb
 
-  private static final TestProfileConnector connector = TestProfileConnector.create(context);
-  private static final InstrumentedTestUtilities utilities =
+  private final TestProfileConnector connector = TestProfileConnector.create(context);
+  private final InstrumentedTestUtilities utilities =
       new InstrumentedTestUtilities(context, connector);
   private final ProfileTestCrossProfileType type = ProfileTestCrossProfileType.create(connector);
 
@@ -55,11 +53,6 @@ public class MessageSizeTest {
   @Before
   public void setup() {
     utilities.ensureReadyForCrossProfileCalls();
-  }
-
-  @AfterClass
-  public static void teardown() {
-    utilities.ensureNoWorkProfile();
   }
 
   @Test

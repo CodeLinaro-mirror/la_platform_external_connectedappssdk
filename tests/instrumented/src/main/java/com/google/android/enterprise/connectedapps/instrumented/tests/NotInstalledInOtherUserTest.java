@@ -25,8 +25,6 @@ import com.google.android.enterprise.connectedapps.instrumented.utils.Instrument
 import com.google.android.enterprise.connectedapps.testapp.connector.TestProfileConnector;
 import com.google.android.enterprise.connectedapps.testapp.types.ProfileTestCrossProfileType;
 import com.google.common.util.concurrent.ListenableFuture;
-
-import org.junit.AfterClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -42,15 +40,10 @@ public class NotInstalledInOtherUserTest {
 
   private static final Application context = ApplicationProvider.getApplicationContext();
 
-  private static final TestProfileConnector connector = TestProfileConnector.create(context);
+  private final TestProfileConnector connector = TestProfileConnector.create(context);
   private final ProfileTestCrossProfileType type = ProfileTestCrossProfileType.create(connector);
-  private static final InstrumentedTestUtilities utilities =
+  private final InstrumentedTestUtilities utilities =
       new InstrumentedTestUtilities(context, connector);
-
-  @AfterClass
-  public static void teardown() {
-    utilities.ensureNoWorkProfile();
-  }
 
   @Test
   public void asyncCall_notInstalledInOtherProfile_failsFast() {

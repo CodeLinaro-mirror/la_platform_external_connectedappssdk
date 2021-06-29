@@ -19,7 +19,6 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.app.Application;
 import androidx.test.core.app.ApplicationProvider;
-
 import com.google.android.enterprise.connectedapps.exceptions.UnavailableProfileException;
 import com.google.android.enterprise.connectedapps.instrumented.utils.BlockingExceptionCallbackListener;
 import com.google.android.enterprise.connectedapps.instrumented.utils.BlockingStringCallbackListener;
@@ -30,13 +29,10 @@ import com.google.android.enterprise.connectedapps.testapp.types.ProfileTestCros
 import com.google.android.enterprise.connectedapps.testing.BlockingPoll;
 import java.util.concurrent.ExecutionException;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import android.util.Log;
 
 /**
  * Tests for high level behaviour running on a correctly configured device (with a managed profile
@@ -50,8 +46,8 @@ public class HappyPathEndToEndTest {
 
   private static final String STRING = "String";
 
-  private static final TestProfileConnector connector = TestProfileConnector.create(context);
-  private static final InstrumentedTestUtilities utilities =
+  private final TestProfileConnector connector = TestProfileConnector.create(context);
+  private final InstrumentedTestUtilities utilities =
       new InstrumentedTestUtilities(context, connector);
   private final ProfileTestCrossProfileType type = ProfileTestCrossProfileType.create(connector);
   private final ProfileTestCrossProfileTypeWhichNeedsContext typeWithContext =
@@ -66,11 +62,6 @@ public class HappyPathEndToEndTest {
   public void teardown() {
     connector.stopManualConnectionManagement();
     utilities.waitForDisconnected();
-  }
-
-  @AfterClass
-  public static void teardownClass() {
-    utilities.ensureNoWorkProfile();
   }
 
   @Test
