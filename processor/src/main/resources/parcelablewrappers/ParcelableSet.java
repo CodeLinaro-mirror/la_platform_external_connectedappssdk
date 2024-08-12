@@ -23,7 +23,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /** Wrapper for reading & writing {@link Set} instances from and to {@link Parcel} instances. */
-public class ParcelableSet<E> implements Parcelable {
+public final class ParcelableSet<E> implements Parcelable {
 
   private static final int NULL_SIZE = -1;
 

@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /** Wrapper for reading & writing {@link Map} instances from and to {@link Parcel} instances. */
-public class ParcelableMap<E, F> implements Parcelable {
+public final class ParcelableMap<E, F> implements Parcelable {
 
   private static final int NULL_SIZE = -1;
 
